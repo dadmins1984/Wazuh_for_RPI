@@ -208,7 +208,6 @@ ufw allow 9200
 check_command "UFW adding Allow port: 9200"
 
 ufw allow 9300:9400/tcp
-ufw allow 9300:9400/udp
 check_command "UFW adding Allow ports: 9300-9400"
 
 ufw allow 443
