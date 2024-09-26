@@ -229,7 +229,6 @@ Wants=network-online.target
 [Service]
 Type=simple
 ExecStart=/bin/systemctl restart wazuh-manager
-User=root
 RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
