@@ -207,13 +207,14 @@ check_command "UFW adding Allow port: 55000"
 ufw allow 9200
 check_command "UFW adding Allow port: 9200"
 
-ufw allow 9300-9400
+sudo ufw allow 9300:9400/tcp
+sudo ufw allow 9300:9400/udp
 check_command "UFW adding Allow ports: 9300-9400"
 
 ufw allow 443
 check_command "UFW adding Allow port: 443"
 
-sudo ufw enable
+ufw --force enable
 check_command "UFW activation"
 
 sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
