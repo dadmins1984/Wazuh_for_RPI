@@ -220,6 +220,23 @@ sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
 sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
 check_command "Disabling extra repositories"
 
+service_file="/etc/systemd/system/wazuh-start.service"
+cat << EOF > $service_file
+[Unit]
+Description=Restart Wazuh Manager on startup
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+ExecStart=/bin/systemctl restart wazuh-manager
+User=root
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable wazuh-start.service
+
 apt-get update
 check_command "Updating repositories"
 
