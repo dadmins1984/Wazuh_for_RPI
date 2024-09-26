@@ -216,6 +216,13 @@ check_command "UFW adding Allow port: 443"
 sudo ufw enable
 check_command "UFW activation"
 
+sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
+check_command "Disabling extra repositories"
+
+apt-get update
+check_command "Updating repositories"
+
 echo "Installation completed successfully!"
 echo "************************************"
 echo "User: elastic"
